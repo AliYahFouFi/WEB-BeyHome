@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('bathrooms')->default(0); // bathrooms
             $table->integer('parking_spaces')->default(0); // parking_spaces
             $table->boolean('furnished')->default(false); // furnished (Boolean: Yes/No)
+            $table->boolean('booked')->default(false); // booked (Boolean: Yes/No)
             $table->timestamps(); // created_at and updated_at
         });
     }
