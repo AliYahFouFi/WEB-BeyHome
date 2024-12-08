@@ -19,10 +19,6 @@ class PropertyController extends Controller
         // Find the property by its ID
         $property = Property::findOrFail($id);
 
-        // Get the reviews for this property
-        // $reviews = Review::where('property_id', $id)->get();
-
-        // Return the property view with the property and its reviews
         return view('property-show', compact('property'));
     }
 }

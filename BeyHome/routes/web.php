@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +28,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Route::get('/property', function () {
-//     return view('show-property');
+//     return view('property-show');
 // });
 
 Route::get('/property/{id}', [PropertyController::class, 'show'])->name('property.show');
 
 Route::post('/properties/{property}/reviews', [ReviewController::class, 'storeRating'])->name('reviews.store');
 
-
+//for booking
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
 
 //BREEZE
 
