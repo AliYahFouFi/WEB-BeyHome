@@ -1,4 +1,4 @@
-<h1>Home
+{{-- <h1>Home
 </h1>
 
 @guest
@@ -11,8 +11,8 @@
 
         <button type="submit">Logout</button>
     </form>
-@endauth
+@endauth --}}
 @include('property-card')
 
-<hr>
-<hr>
+{{-- <hr>
+<hr> --}}

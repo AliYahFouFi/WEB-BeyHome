@@ -18,7 +18,7 @@ class BookingController extends Controller
             'user_id' => 'required|exists:users,id',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
-            'total_price' => 'required',
+            // 'total_price' => 'required',
         ]);
 
         // Check if the property is already booked for the given dates
@@ -38,7 +38,7 @@ class BookingController extends Controller
             'user_id' => $request->user_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'total_price' => $request->total_price,
+            'total_price' => '200',  // default price
             'status' => 'pending',  // default status
         ]);
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,15 +29,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Route::get('/property', function () {
-//     return view('property-show');
+//     return view('show-property');
 // });
 
 Route::get('/property/{id}', [PropertyController::class, 'show'])->name('property.show');
 
 Route::post('/properties/{property}/reviews', [ReviewController::class, 'storeRating'])->name('reviews.store');
 
-//for booking
-Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
+
 
 //BREEZE
 
@@ -45,5 +45,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
 
 require __DIR__ . '/auth.php';
+Route::get('/index', function () {
+    return view('index');
+});
+
+Route::get('/places', function () {
+    return view('shop');
+});

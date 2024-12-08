@@ -60,7 +60,7 @@ body {
 
 /*header section*/
 .hero_area {
-  padding: 0 45px;
+  padding: 0;
 }
 
 .hero_area.sub_pages {
@@ -69,17 +69,15 @@ body {
 
 #navbarSupportedContent {
   width: 100%;
-  background-color: #f9ece6;
+  background-color:black;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px 0;
-  border-radius: 15px 15px 0 0;
 }
 
 #navbarSupportedContent.innerpage_navbar {
-  background-color: white;
-  border-radius: 10px;
+  background-color:black;
   -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
 }
@@ -90,7 +88,7 @@ body {
 
 #navbarSupportedContent .navbar-nav .nav-link {
   padding: 5px 25px;
-  color: #514f4f;
+  color: white;
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
@@ -98,6 +96,7 @@ body {
 
 #navbarSupportedContent .nav-item.active .nav-link {
   background-color: #ffffff;
+  color: #000000;
 }
 
 a,
@@ -135,6 +134,7 @@ a:focus {
 .custom_nav-container .nav_search-btn {
   padding: 0;
   border: none;
+  color: white!important;
 }
 
 .custom_nav-container {
@@ -224,7 +224,7 @@ a:focus {
 
 .user_option a {
   margin-right: 25px;
-  color: #000000;
+  color:white;
 }
 
 .user_option a span {
@@ -233,11 +233,9 @@ a:focus {
 
 /*end header section*/
 .slider_section .slider_container {
-  color: #fefefe;
-  background-color: #000000;
-  background-color: #f89cab;
+  color:black;
+  background-color: white;
   padding: 25px;
-  border-radius: 0 0 15px 15px;
 }
 
 .slider_section .row {
@@ -274,9 +272,9 @@ a:focus {
 .slider_section .detail-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #db4566;
+  background-color: #000000;
   color: #ffffff;
-  border: 1px solid #db4566;
+  border: 1px solid #000000;
   border-radius: 5px;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -400,9 +398,9 @@ a:focus {
 .shop_section .btn-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #f16179;
+  background-color: #000000;
   color: #ffffff;
-  border: 1px solid #f16179;
+  border: 1px solid #000000;
   border-radius: 5px;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -410,7 +408,7 @@ a:focus {
 
 .shop_section .btn-box a:hover {
   background-color: transparent;
-  color: #f16179;
+  color: #000000;
 }
 
 .saving_section {
