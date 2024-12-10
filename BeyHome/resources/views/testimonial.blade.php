@@ -69,10 +69,10 @@
           </ul>
           <div class="user_option">
             <a href="">
-              <i class="fa fa-user" aria-hidden="true"></i>
-              <span>
+              <i class="fa fa-user" aria-hidden="true" href="/login"></i>
+              <a href="/login">
                 Login
-              </span>
+              </a>
             </a>
             <a href="">
               <i class="fa fa-shopping-bag" aria-hidden="true"></i>
