@@ -49,7 +49,7 @@
                 class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                 required>
                 <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-                <option value="admin" {{ old('role') == 'host' ? 'selected' : '' }}>Host</option>
+                <option value="host" {{ old('role') == 'host' ? 'selected' : '' }}>Host</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>

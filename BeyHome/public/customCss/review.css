@@ -1,0 +1,82 @@
+#review-form {
+    background-color: gray;
+    /* Or any other color */
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid pink;
+    border-radius: 5px;
+    width: 50rem;
+    /* display: flex !important; */
+}
+
+.star-rating {
+    direction: rtl;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating .star {
+    color: blue;
+    /* Unselected star color */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ .star,
+.star-rating input[type="radio"]:hover ~ .star {
+    color: red;
+    /* Selected star color */
+}
+
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+    color: purple;
+    /* Hover star color */
+}
+
+.temp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star {
+    font-size: 3rem;
+    /* Adjust size as needed */
+    color: purple;
+    display: flex;
+    align-items: center;
+    /* Star color */
+}
+
+.star.gray {
+    color: gray;
+    /* Gray color for empty stars */
+    display: flex;
+    align-items: center;
+}
+
+.star-con {
+    display: flex;
+}
+
+.rating-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    /* justify-content: center; */
+    font-size: 2.2rem;
+}
+
+.add-review-link {
+    text-align: center;
+    align-self: center;
+    font-size: 1.5rem;
+    margin: 10px;
+}
