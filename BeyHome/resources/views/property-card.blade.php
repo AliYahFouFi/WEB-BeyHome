@@ -9,102 +9,67 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Properties</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link href="{{ asset('customCss/card.css') }}" rel="stylesheet">
         <style>
-            /* Custom Black and White adjustments */
-            .card {
-                background-color: #fff;
-                border: 1px solid #ddd;
-            }
 
-            .card-body {
-                color: #000;
-            }
-
-            .card-title {
-                color: #000;
-            }
-
-            .card-text {
-                color: #555;
-            }
-
-            .card-footer {
-                background-color: #f8f9fa;
-                color: #888;
-            }
-
-            /* Black button with white text */
-            .btn-primary {
-                background-color: #000;
-                /* Black background */
-                color: #fff;
-                /* White text */
-                border: 1px solid #000;
-                /* Black border */
-            }
-
-            .btn-primary:hover {
-                background-color: #333;
-                /* Darker shade of black on hover */
-                color: #fff;
-                /* White text remains */
-            }
-
-            .pagination {
-                justify-content: center;
-            }
-
-            .pagination a,
-            .pagination .active {
-                background-color: #000;
-                border-color: #000;
-                color: #fff;
-            }
-
-            .pagination .active {
-                background-color: #fff;
-                border-color: #fff;
-                color: #000;
-            }
-
-            .pagination a:hover {
-                background-color: #333;
-            }
-
-            .card-img-top {
-                width: 100%;
-                height: 200px;
-                object-fit: cover;
-            }
         </style>
     </head>
 
     <body>
+
         <div class="container py-5">
             <div class="row row-cols-1 row-cols-md-3 g-4">
+
                 @foreach ($properties as $property)
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="{{ $property->image ?? 'https://picsum.photos/200/100' }}" class="card-img-top"
-                                alt="{{ $property->name }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $property->name }}</h5>
-                                <p class="card-text">{{ $property->description ?? 'No description available.' }}</p>
-                                <p><strong>Price: </strong>${{ number_format($property->price, 2) }}</p>
-                                <p><strong>Location: </strong>{{ $property->location }}</p>
-                                <p><strong>Booked: </strong>{{ $property->booked ? 'Yes' : 'No' }}</p>
-                                <a href="{{ route('property.show', ['id' => $property->id]) }}" class="btn btn-primary">View
-                                    Property</a>
-                                {{-- for adding to favorites --}}
-                                <li>
-                                    <form action="{{ route('favorites.store', $property->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary">Add to favorites</button>
-                                    </form>
-                                </li>
+                        <div class="card h-100 shadow-lg border-0 position-relative">
+
+                            <div class="card-img-container position-relative">
+                                <img src="{{ $property->image ?? 'https://picsum.photos/200/100' }}"
+                                    class="card-img-top rounded-top" alt="{{ $property->name }}">
+                                <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
+                                    {{ $property->booked ? 'Booked' : 'Available' }}
+                                </div>
+                                <!-- Heart Icon -->
+                                <form action="{{ route('favorites.store', $property->id) }}" method="POST"
+                                    class="position-absolute top-0 end-0 m-2">
+                                    @csrf
+                                    {{-- ADD if the user added it change the icon to solid --}}
+                                    <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
+
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                </form>
+                            </div>
+
+
+
+
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-primary">{{ $property->name }}</h5>
+
+
+                                <p class="card-text text-muted mb-3">
+                                    {{ $property->description ?? 'No description available.' }}
+                                </p>
+                                <div> <strong>Only For:</strong> ${{ number_format($property->price, 2) }}</div>
+
+                                <p><strong>Located at: </strong>{{ $property->location }}</p>
+                                <div class="mt-auto">
+                                    <a href="{{ route('property.show', ['id' => $property->id]) }}"
+                                        class="btn btn-outline-primary w-100 hover-black">
+                                        View Property
+                                    </a>
+                                </div>
 
                             </div>
-                            <div class="card-footer">
+
+
+
+
+
+                            <div class="card-footer bg-light">
                                 <small class="text-muted">Last updated {{ $property->updated_at->diffForHumans() }}</small>
                             </div>
                         </div>

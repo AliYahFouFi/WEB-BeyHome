@@ -7,191 +7,270 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Property Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('customCss/review.css') }}" rel="stylesheet">
-    <style>
-        .property-image {
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .property-title {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .property-price {
-            font-size: 1.5rem;
-            color: #28a745;
-            margin-bottom: 1rem;
-        }
-
-        .property-description {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-container {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-book {
-            width: 100%;
-            font-size: 1.2rem;
-            padding: 0.75rem;
-            background-color: black;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-book:hover {
-            background-color: black;
-        }
-    </style>
 </head>
 
+
 <body>
+    @include('filtered-properties')
     <!-- Property Details Section -->
     <div class="container py-5">
         <div class="row">
             <!-- Property Image -->
-            <div class="col-md-6 mb-4">
-                <div class="image-container">
-                    <img src="https://picsum.photos/500/300" alt="Property Image" class="img-fluid property-image">
+            <div id="carouselExampleIndicators" class="carousel slide imgSlider" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
                 </div>
-            </div>
-
-            <!-- Property Details -->
-            <div class="col-md-6">
-                <h1 class="property-title">{{ $property->name }}</h1>
-                <p class="property-price">$ {{ $property->price }}</p>
-                <p class="property-description">{{ $property->description }}</p>
-                <p><strong>Location:</strong> {{ $property->location }}</p>
-                <p><strong>Area:</strong> {{ $property->area }} sq. ft.</p>
-                <p><strong>Bedrooms:</strong> {{ $property->bedrooms }}</p>
-                <p><strong>Bathrooms:</strong> {{ $property->bathrooms }}</p>
-                <p><strong>Parking Spaces:</strong> {{ $property->parking_spaces }}</p>
-                <p><strong>Furnished:</strong> {{ $property->furnished ? 'Yes' : 'No' }}</p>
-                <p><strong>Booked:</strong> {{ $property->booked ? 'Yes' : 'No' }}</p>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://picsum.photos/500/300" class="d-block w-100" alt="image1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/500/300" class="d-block w-100" alt="image2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://picsum.photos/500/300" class="d-block w-100" alt="image3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
-
-        <!-- Booking Form Section -->
+        <hr>
+        <!-- Property Details -->
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="form-container">
-                    <h4 class="mb-4">Booking</h4>
+            <!-- Left Column -->
+            <div class="col-12 col-md-6 mb-3">
+                <div class="extra-content">
 
-                    <!-- Display any success or error message here -->
+                    <h5>Additional Information</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, sint ipsam autem non
+                        voluptates excepturi error quaerat magni ad magnam in hic similique dicta quisquam
+                        dignissimos assumenda voluptatum accusamus tenetur.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
 
-                    <form action="{{ route('bookings.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="total_price" id="total_price" value="{{ $property->price }}">
-                        <input type="hidden" name="property_id" value="{{ $property->id }}">
-                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <!-- Property Title and Price -->
 
-                        <div class="form-group mb-3">
-                            <label for="start_date">Start Date</label>
-                            <input type="date" name="start_date" id="start_date" class="form-control" required>
+                        <h1 class="property-title text-primary mb-3">{{ $property->name }}</h1>
+                        <p class="property-price text-success fw-bold h4">$ {{ number_format($property->price, 2) }}</p>
+
+                        <!-- Property Description -->
+                        <p class="property-description text-muted">{{ $property->description }}</p>
+
+                        <!-- Location -->
+                        <p class="text-secondary"><strong>Location:</strong> {{ $property->location }}</p>
+
+                        <!-- Details Section -->
+                        <div class="details mt-4">
+                            <h5 class="text-dark">Details:</h5>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-map-marker-alt mr-2"></i>
+                                        <span><strong>Area:</strong> {{ $property->area }} sq. ft.</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-bed mr-2"></i>
+                                        <span><strong>Bedrooms:</strong> {{ $property->bedrooms }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-bath mr-2"></i>
+                                        <span><strong>Bathrooms:</strong> {{ $property->bathrooms }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-car mr-2"></i>
+                                        <span><strong>Parking Spaces:</strong> {{ $property->parking_spaces }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-couch mr-2"></i>
+                                        <span><strong>Furnished:</strong>
+                                            {{ $property->furnished ? 'Yes' : 'No' }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="end_date">End Date</label>
-                            <input type="date" name="end_date" id="end_date" class="form-control" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-book">Book Now</button>
-                    </form>
+                        <!-- Booking Status -->
+                        <p class="mt-3">
+                            <span class="badge {{ $property->booked ? 'bg-danger' : 'bg-success' }}">
+                                {{ $property->booked ? 'not available' : 'Available' }}
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <hr>
+        <!-- Booking and Rating Form Section -->
+
+        <div class="container">
+            <div class="row booking-form">
+                <!-- Left Column :Rating -->
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="extra-content">
+
+                        <div class="rating-container">
+                            <h5>Rating</h5>
+                            <div class="star-con">
+                                @switch($property->rating)
+                                    @case(0)
+                                        <div class="star-con">
+                                            <span class="star gray">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @case(1)
+                                        <div class="star-con">
+                                            <span class="star">&#9733;</span>
+                                            <span class="star gray">&#9733;&#9733;&#9733;&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @case(2)
+                                        <div class="star-con">
+                                            <span class="star">&#9733;&#9733;</span>
+                                            <span class="star gray">&#9733;&#9733;&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @case(3)
+                                        <div class="star-con">
+                                            <span class="star">&#9733;&#9733;&#9733;</span>
+                                            <span class="star gray">&#9733;&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @case(4)
+                                        <div class="star-con">
+                                            <span class="star">&#9733;&#9733;&#9733;&#9733;</span>
+                                            <span class="star gray">&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @case(5)
+                                        <div class="star-con">
+                                            <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                        </div>
+                                    @break
+
+                                    @default
+                                        <span>No rating</span>
+                                @endswitch
+                                <button class="btn btn-primary w-100">
+                                    <a href="#" id="add-review-link"
+                                        class="add-review-link text-white text-decoration-none ">add
+                                        rating</a>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="review-form" style="display: none;">
+                            <form id="rating-form"
+                                action="{{ route('reviews.store', ['property' => $property->id]) }}" method="POST">
+                                @csrf
+                                <div class="star-rating">
+                                    <input type="radio" name="rating" id="star-5" value="5">
+                                    <label for="star-5" class="star">&#9733;</label>
+                                    <input type="radio" name="rating" id="star-4" value="4">
+                                    <label for="star-4" class="star">&#9733;</label>
+                                    <input type="radio" name="rating" id="star-3" value="3">
+                                    <label for="star-3" class="star">&#9733;</label>
+                                    <input type="radio" name="rating" id="star-2" value="2">
+                                    <label for="star-2" class="star">&#9733;</label>
+                                    <input type="radio" name="rating" id="star-1" value="1">
+                                    <label for="star-1" class="star">&#9733;</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Rating</button>
+                            </form>
+                            <div id="rating-response-message"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Right Column: Booking Form -->
+                <div class="col-12 col-md-6 mb-3">
+                    <div class="form-container">
+                        <h4 class="mb-4">Booking</h4>
+
+                        <!-- Display any success or error message here -->
+                        @if (session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @elseif(session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+
+                        <form action="{{ route('bookings.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="total_price" id="total_price"
+                                value="{{ $property->price }}">
+                            <input type="hidden" name="property_id" value="{{ $property->id }}">
+                            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+
+                            <div class="row">
+                                <div class="col-12 col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="start_date">Check in</label>
+                                        <input type="date" name="start_date" id="start_date" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="end_date">Check out</label>
+                                        <input type="date" name="end_date" id="end_date" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <hr>
 
 
         {{-- Review Section --}}
 
-        <div class="rating-container">
-            <div class="rating-container">
-                Rating:<div class="star-con">
 
-                    @switch($property->rating)
-                        @case(0)
-                            <div class="star-con">
-                                <span class="star gray">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                            </div>
-                        @break
 
-                        @case(1)
-                            <div class="star-con">
-                                <span class="star">&#9733;</span>
-                                <span class="star gray">&#9733;&#9733;&#9733;&#9733;</span>
-                            </div>
-                        @break
 
-                        @case(2)
-                            <div class="star-con">
-                                <span class="star">&#9733;&#9733;</span>
-                                <span class="star gray">&#9733;&#9733;&#9733;</span>
-                            </div>
-                        @break
-
-                        @case(3)
-                            <div class="star-con">
-                                <span class="star">&#9733;&#9733;&#9733;</span>
-                                <span class="star gray">&#9733;&#9733;</span>
-                            </div>
-                        @break
-
-                        @case(4)
-                            <div class="star-con">
-                                <span class="star">&#9733;&#9733;&#9733;&#9733;</span>
-                                <span class="star gray">&#9733;</span>
-                            </div>
-                        @break
-
-                        @case(5)
-                            <div class="star-con">
-                                <span class="star">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                            </div>
-                        @break
-
-                        @default
-                            <span>No rating</span>
-                    @endswitch
-
-                    <a href="#" id="add-review-link" class="add-review-link add-to-cart">add rating
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="review-form" style="display: none;">
-            <form id="rating-form" action="{{ route('reviews.store', ['property' => $property->id]) }}" method="POST">
-                @csrf
-                <div class="star-rating ">
-                    <input type="radio" name="rating" id="star-5" value="5">
-                    <label for="star-5" class="star">&#9733;</label>
-                    <input type="radio" name="rating" id="star-4" value="4">
-                    <label for="star-4" class="star">&#9733;</label>
-                    <input type="radio" name="rating" id="star-3" value="3">
-                    <label for="star-3" class="star">&#9733;</label>
-                    <input type="radio" name="rating" id="star-2" value="2">
-                    <label for="star-2" class="star">&#9733;</label>
-                    <input type="radio" name="rating" id="star-1" value="1">
-                    <label for="star-1" class="star">&#9733;</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Rating</button>
-            </form>
-            <div id="rating-response-message"></div>
-        </div>
 
         <script>
-            // Toggle the review form
+            // Toggle the rating form
             document.getElementById('add-review-link').addEventListener('click', function(event) {
                 event.preventDefault();
                 const reviewForm = document.getElementById('review-form');
@@ -252,10 +331,10 @@
                         method: 'POST',
                         body: formData,
                         headers: {
-                            'X-CSRF-TOKEN': formData.get('_token') // Laravel's CSRF token
+                            'X-CSRF-TOKEN': formData.get('_token')
                         }
                     })
-                    .then(response => response.json()) // Parse the JSON response
+                    .then(response => response.json())
                     .then(data => {
                         let responseMessage = document.getElementById('responseMessage');
                         if (data.success) {
@@ -287,7 +366,89 @@
         </script>
 
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
+<style>
+    .property-title {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .property-price {
+        font-size: 1.5rem;
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+
+    .property-description {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+
+
+    .property-title.text-primary.mb-3 {
+        color: black !important;
+    }
+
+    .card-body {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    .form-container {
+        padding: 2rem;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input {
+        border: black 1px solid !important;
+    }
+
+    /* for img slider */
+    /* Set a specific height for the carousel */
+    .imgSlider .carousel-inner {
+        height: 600px;
+        /* You can adjust this height to your desired value */
+        margin: 20px;
+        border-radius: 10px;
+    }
+
+    /* Ensure images inside the carousel take the full width and maintain the aspect ratio */
+    .imgSlider .carousel-item img {
+        object-fit: cover;
+        /* Ensures the image covers the space without distorting */
+        height: 100%;
+        /* Make sure the image fills the height of the carousel */
+    }
+
+
+    .col-12.col-md-6.mb-3 {
+        padding-right: 0px !important;
+    }
+
+
+    /* FOR RATING */
+    .rating-container {
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+</style>
 
 </html>

@@ -38,8 +38,12 @@ class PropertyController extends Controller
         // Apply filters based on user input
         $query = Property::query();
 
+
         if (!empty($locations)) {
-            $query->whereIn('location', $locations);
+            if ($locations[0] == 'all') {
+            } else {
+                $query->whereIn('location', $locations);
+            }
         }
 
         if ($minPrice) {

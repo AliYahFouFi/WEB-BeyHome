@@ -23,6 +23,7 @@ class ReviewController extends Controller
         $review->save();
         //we calculates the average rating of reviews for a specific property.
         $temp = Review::where('property_id', $property->id)->avg('rating');
+        $temp = ceil($temp);
         property::where('id', $property->id)->update(['rating' => $temp]);
 
         return redirect()->back()->with('success', 'property rated successfully.');
