@@ -76,4 +76,6 @@ require __DIR__ . '/auth.php';
 
 
 //for testing
-Route::get('/test', [PropertyController::class, 'showfilter'])->name('filter-show');
+Route::get('/test', function () {
+    return view('customLayout\header');
+});

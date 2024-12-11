@@ -2,81 +2,76 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-  <title>
-    BeyHome
-  </title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <link href="css/style.css" rel="stylesheet" />
-  <link href="css/responsive.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <title>
+        BeyHome
+    </title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="hero_area">
-    <header class="header_section">
-      <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <a class="navbar-brand" href="index.html">
-          <span>
-            BeyHome
-          </span>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class=""></span>
-        </button>
+    <div class="hero_area">
+        <header class="header_section">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="{{ route('home') }}">
+                    <span>
+                        BeyHome
+                    </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class=""></span>
+                </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav  ">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="shop.html">
-                Shop
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="why.html">
-                Why Us
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="testimonial.html">
-                Testimonial
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href='{{ route('favorites.show') }}'>SHow favorites</a>
-            </li>
-        </ul>
-        <div class="user_option">
-            @guest
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-           @endguest
-           @auth
-            <form id="myForm" action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-light">Logout</button>
-            </form>
-            <a href="" class="btn btn-light ms-3">Add Property</a>      
-           @endauth
-        </div>
-        </div>
-      </nav>
-      <div> @include('filtered-properties')</div>
-    </header>
-    <!-- end header section -->
-    <!-- slider section -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ route('home') }}">Home <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact Us</a>
+                        </li>
+
+                        <a class="nav-link" href='{{ route('favorites.show') }}'>SHow favorites</a>
+                        @guest
+                            <li class="nav-item"> <a class="nav-link" href="/login">Login</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="/register">Register</a> </li>
+
+
+                        @endguest
+                        @auth
+                            <form id="myForm" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <li class="nav-item"><button type="submit" class="btn btn-light">Logout</button> </li>
+                            </form>
+                            <li class="nav-item"> <a href="" class="nav-link">Add Property</a>
+                            <li></li>
+                        @endauth
+                    </ul>
+                    <div class="user_option">
+
+
+                    </div>
+                </div>
+            </nav>
+            <div> @include('filtered-properties')</div>
+        </header>
+        <!-- end header section -->
+        <!-- slider section -->
 
         <section class="slider_section">
             <div class="slider_container">
@@ -88,14 +83,16 @@
                                     <div class="col-md-7">
                                         <div class="detail-box">
                                             <h1>
-                                                Welcome To Our <br>
-                                                Gift Shop
+                                                Welcome To <br>
+                                                BeyHome
                                             </h1>
                                             <p>
-                                                Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non
-                                                necessitatibus error distinctio mollitia suscipit. Nostrum fugit
-                                                doloribus consequatur distinctio esse, possimus maiores aliquid repellat
-                                                beatae cum, perspiciatis enim, accusantium perferendis.
+                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                                We offer a diverse selection of properties, from cozy apartments to
+                                                spacious villas, tailored to meet every lifestyle and budget. Whether
+                                                you're searching for a serene mountain retreat or a vibrant city
+                                                residence, BeyHome makes finding your ideal home seamless and
+                                                hassle-free."
                                             </p>
                                             <a href="">
                                                 Contact Us
@@ -116,14 +113,16 @@
                                     <div class="col-md-7">
                                         <div class="detail-box">
                                             <h1>
-                                                Welcome To Our <br>
-                                                Gift Shop
+                                                Welcome To <br>
+                                                BeyHome
                                             </h1>
                                             <p>
-                                                Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non
-                                                necessitatibus error distinctio mollitia suscipit. Nostrum fugit
-                                                doloribus consequatur distinctio esse, possimus maiores aliquid repellat
-                                                beatae cum, perspiciatis enim, accusantium perferendis.
+                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                                We offer a diverse selection of properties, from cozy apartments to
+                                                spacious villas, tailored to meet every lifestyle and budget. Whether
+                                                you're searching for a serene mountain retreat or a vibrant city
+                                                residence, BeyHome makes finding your ideal home seamless and
+                                                hassle-free."
                                             </p>
                                             <a href="">
                                                 Contact Us
@@ -144,14 +143,16 @@
                                     <div class="col-md-7">
                                         <div class="detail-box">
                                             <h1>
-                                                Welcome To Our <br>
-                                                Gift Shop
+                                                Welcome To <br>
+                                                BeyHome
                                             </h1>
                                             <p>
-                                                Sequi perspiciatis nulla reiciendis, rem, tenetur impedit, eveniet non
-                                                necessitatibus error distinctio mollitia suscipit. Nostrum fugit
-                                                doloribus consequatur distinctio esse, possimus maiores aliquid repellat
-                                                beatae cum, perspiciatis enim, accusantium perferendis.
+                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                                We offer a diverse selection of properties, from cozy apartments to
+                                                spacious villas, tailored to meet every lifestyle and budget. Whether
+                                                you're searching for a serene mountain retreat or a vibrant city
+                                                residence, BeyHome makes finding your ideal home seamless and
+                                                hassle-free."
                                             </p>
                                             <a href="">
                                                 Contact Us
@@ -204,6 +205,7 @@
         @endif
 
     </div>
+
     <div>
         @yield('content')
     </div>
@@ -252,7 +254,6 @@
     <!-- end saving section -->
 
     <!-- why section -->
-
     {{-- <section class="why_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
@@ -704,7 +705,7 @@
     <!-- end client section -->
 
     <!-- info section -->
-    {{-- 
+
     <section class="info_section  layout_padding2-top">
         <div class="social_container">
             <div class="social_box">
@@ -789,7 +790,7 @@
         </footer>
         <!-- footer section -->
 
-    </section> --}}
+    </section>
 
     <!-- end info section -->
 

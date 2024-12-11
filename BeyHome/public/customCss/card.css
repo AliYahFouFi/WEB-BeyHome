@@ -1,0 +1,97 @@
+/* Custom Black and White adjustments */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.card-body {
+    color: #000;
+}
+
+.card-title {
+    color: #000;
+}
+
+.card-text {
+    color: #555;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    color: #888;
+}
+
+/* Black button with white text */
+.btn-primary {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+
+    color: #fff;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination a,
+.pagination .active {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.pagination .active {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.pagination a:hover {
+    background-color: #333;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* ZULFKIRA ADD: */
+
+.card-img-container {
+    height: 200px;
+    /* Adjust height as needed */
+    overflow: hidden;
+    /* Ensure content doesn't overflow */
+}
+
+.card-img-container img {
+    object-fit: cover;
+    /* Ensures image scales to fill the container */
+    width: 100%;
+    height: 100%;
+}
+
+h5.card-title.text-primary {
+    color: #000 !important;
+}
+
+a.btn.btn-outline-primary.w-100 {
+    color: #000;
+}
+
+a.btn.btn-outline-primary.w-100.hover-black {
+    transition: all 0.3s ease;
+    border-color: #000;
+}
+
+a.btn.btn-outline-primary.w-100.hover-black:hover {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
