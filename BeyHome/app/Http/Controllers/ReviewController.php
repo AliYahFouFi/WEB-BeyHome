@@ -10,16 +10,21 @@ use App\Models\WrittenReviews;
 
 class ReviewController extends Controller
 {
-    //
+    //RATING STARes 1 to 5
     public function storeRating(Request $request, Property $property)
     {
         $request->validate([
             'rating' => 'required|min:1|max:5',
         ]);
 
+        $hasReview = Review::where('user_id', auth()->user()->id)->where('property_id', $property->id)->exists();
+        if ($hasReview) {
+            return redirect()->back()->with('error', 'You have already rated this property.');
+        }
         $review = new Review();
         $review->property_id = $property->id;
         $review->rating = $request->input('rating');
+        $review->user_id = auth()->user()->id;
         $review->save();
         //we calculates the average rating of reviews for a specific property.
         $temp = Review::where('property_id', $property->id)->avg('rating');

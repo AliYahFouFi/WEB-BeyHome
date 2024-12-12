@@ -8,7 +8,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
     <title>
         BeyHome
     </title>
@@ -20,176 +20,121 @@
 </head>
 
 <body>
-    <div class="hero_area">
-        <header class="header_section">
-            <nav class="navbar navbar-expand-lg custom_nav-container ">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <span>
-                        BeyHome
-                    </span>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class=""></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav  ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('home') }}">Home <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
+    @include('customLayouts.header')
 
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
-                        </li>
-
-                        <a class="nav-link" href='{{ route('favorites.show') }}'>SHow favorites</a>
-                        @guest
-                            <li class="nav-item"> <a class="nav-link" href="/login">Login</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="/register">Register</a> </li>
-
-
-                        @endguest
-                        @auth
-                            <form id="myForm" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <li class="nav-item"><button type="submit" class="btn btn-light">Logout</button> </li>
-                            </form>
-                            <li class="nav-item"> <a href="" class="nav-link">Add Property</a>
-                            <li></li>
-                        @endauth
-                    </ul>
-                    <div class="user_option">
-
-
+    <!-- slider section -->
+    <section class="slider_section">
+        <div class="slider_container">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Welcome To <br>
+                                            BeyHome
+                                        </h1>
+                                        <p>
+                                            "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                            We offer a diverse selection of properties, from cozy apartments to
+                                            spacious villas, tailored to meet every lifestyle and budget. Whether
+                                            you're searching for a serene mountain retreat or a vibrant city
+                                            residence, BeyHome makes finding your ideal home seamless and
+                                            hassle-free."
+                                        </p>
+                                        <a href="">
+                                            Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 ">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Welcome To <br>
+                                            BeyHome
+                                        </h1>
+                                        <p>
+                                            "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                            We offer a diverse selection of properties, from cozy apartments to
+                                            spacious villas, tailored to meet every lifestyle and budget. Whether
+                                            you're searching for a serene mountain retreat or a vibrant city
+                                            residence, BeyHome makes finding your ideal home seamless and
+                                            hassle-free."
+                                        </p>
+                                        <a href="">
+                                            Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 ">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Welcome To <br>
+                                            BeyHome
+                                        </h1>
+                                        <p>
+                                            "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
+                                            We offer a diverse selection of properties, from cozy apartments to
+                                            spacious villas, tailored to meet every lifestyle and budget. Whether
+                                            you're searching for a serene mountain retreat or a vibrant city
+                                            residence, BeyHome makes finding your ideal home seamless and
+                                            hassle-free."
+                                        </p>
+                                        <a href="">
+                                            Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 ">
+                                    <div class="img-box">
+                                        <img src="images/slider-img.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </nav>
-            <div> @include('filtered-properties')</div>
-        </header>
-        <!-- end header section -->
-        <!-- slider section -->
-
-        <section class="slider_section">
-            <div class="slider_container">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="detail-box">
-                                            <h1>
-                                                Welcome To <br>
-                                                BeyHome
-                                            </h1>
-                                            <p>
-                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
-                                                We offer a diverse selection of properties, from cozy apartments to
-                                                spacious villas, tailored to meet every lifestyle and budget. Whether
-                                                you're searching for a serene mountain retreat or a vibrant city
-                                                residence, BeyHome makes finding your ideal home seamless and
-                                                hassle-free."
-                                            </p>
-                                            <a href="">
-                                                Contact Us
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 ">
-                                        <div class="img-box">
-                                            <img src="images/slider-img.png" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item ">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="detail-box">
-                                            <h1>
-                                                Welcome To <br>
-                                                BeyHome
-                                            </h1>
-                                            <p>
-                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
-                                                We offer a diverse selection of properties, from cozy apartments to
-                                                spacious villas, tailored to meet every lifestyle and budget. Whether
-                                                you're searching for a serene mountain retreat or a vibrant city
-                                                residence, BeyHome makes finding your ideal home seamless and
-                                                hassle-free."
-                                            </p>
-                                            <a href="">
-                                                Contact Us
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 ">
-                                        <div class="img-box">
-                                            <img src="images/slider-img.png" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item ">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <div class="detail-box">
-                                            <h1>
-                                                Welcome To <br>
-                                                BeyHome
-                                            </h1>
-                                            <p>
-                                                "Welcome to BeyHome, your trusted platform for renting homes in Lebanon.
-                                                We offer a diverse selection of properties, from cozy apartments to
-                                                spacious villas, tailored to meet every lifestyle and budget. Whether
-                                                you're searching for a serene mountain retreat or a vibrant city
-                                                residence, BeyHome makes finding your ideal home seamless and
-                                                hassle-free."
-                                            </p>
-                                            <a href="">
-                                                Contact Us
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 ">
-                                        <div class="img-box">
-                                            <img src="images/slider-img.png" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel_btn-box">
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                            data-slide="prev">
-                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <img src="images/line.png" alt="" />
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                            data-slide="next">
-                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+                <div class="carousel_btn-box">
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <img src="images/line.png" alt="" />
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- end slider section -->
 
-        <!-- end slider section -->
-    </div>
-    <!-- end hero area -->
-
-    <!-- shop section -->
 
     <div>
         @if (session('success'))
@@ -203,14 +148,13 @@
                 {{ session('error') }}
             </div>
         @endif
-
     </div>
 
     <div>
         @yield('content')
     </div>
 
-    <!-- end shop section -->
+
 
     <!-- saving section -->
 
@@ -354,7 +298,7 @@
                             </svg>
                         </div>
                         <div class="detail-box">
-                            <h5>
+                            <h5 style="color: black">
                                 Fast Delivery
                             </h5>
                             <p>
@@ -576,8 +520,8 @@
                         <div class="map-responsive">
                             <iframe
                                 src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France"
-                                width="600" height="300" frameborder="0"
-                                style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
+                                width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%"
+                                allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -609,7 +553,7 @@
     <!-- end contact section -->
 
     <!-- client section -->
-    {{-- <section class="client_section layout_padding">
+    <section class="client_section layout_padding" style="padding-top: 0">
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
@@ -624,7 +568,7 @@
                         <div class="box">
                             <div class="client_info">
                                 <div class="client_name">
-                                    <h5>
+                                    <h5 style="color: black">
                                         Morijorch
                                     </h5>
                                     <h6>
@@ -647,7 +591,7 @@
                         <div class="box">
                             <div class="client_info">
                                 <div class="client_name">
-                                    <h5>
+                                    <h5 style="color: black">
                                         Rochak
                                     </h5>
                                     <h6>
@@ -669,7 +613,7 @@
                         <div class="box">
                             <div class="client_info">
                                 <div class="client_name">
-                                    <h5>
+                                    <h5 style="color: black">
                                         Brad Johns
                                     </h5>
                                     <h6>
@@ -701,98 +645,11 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <!-- end client section -->
 
-    <!-- info section -->
 
-    <section class="info_section  layout_padding2-top">
-        <div class="social_container">
-            <div class="social_box">
-                <a href="">
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                    <i class="fa fa-youtube" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-        <div class="info_container ">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-lg-3">
-                        <h6>
-                            ABOUT US
-                        </h6>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
-                        </p>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="info_form ">
-                            <h5>
-                                Newsletter
-                            </h5>
-                            <form action="#">
-                                <input type="email" placeholder="Enter your email">
-                                <button>
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <h6>
-                            NEED HELP
-                        </h6>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
-                        </p>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <h6>
-                            CONTACT US
-                        </h6>
-                        <div class="info_link-box">
-                            <a href="">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <span> Gb road 123 london Uk </span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <span>+01 12345678901</span>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span> demo@gmail.com</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- footer section -->
-        <footer class=" footer_section">
-            <div class="container">
-                <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a>
-                </p>
-            </div>
-        </footer>
-        <!-- footer section -->
-
-    </section>
-
-    <!-- end info section -->
+    @include('customLayouts.footer')
 
 
     <script src="js/jquery-3.4.1.min.js"></script>

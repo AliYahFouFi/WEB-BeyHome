@@ -51,3 +51,8 @@ select:focus {
     color: #fff;
     border: 1px solid #000;
 }
+
+.btn.btn-primary:active {
+    background-color: #464646 !important;
+    color: #fff;
+}
