@@ -63,7 +63,11 @@ class PropertyController extends Controller
         }
         // Get the filtered properties
         $properties = $query->paginate(6);
-
+        if (auth()->user()) {
+            $favorites = auth()->user()->favorites->pluck('id');
+            return view('filtered-properties-page', compact('properties', 'favorites'));
+        }
+        $favorites = 0;
         return view('filtered-properties-page', compact('properties'));
     }
 }

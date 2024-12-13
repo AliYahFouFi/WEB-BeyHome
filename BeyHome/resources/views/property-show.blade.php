@@ -240,6 +240,7 @@
                             <input type="hidden" name="property_id" value="{{ $property->id }}">
                             <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
+
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-3">
                                     <div class="form-group">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Property;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingConfirmEmail;
 
 class BookingController extends Controller
 {
@@ -45,6 +47,10 @@ class BookingController extends Controller
         $property = Property::find($request->property_id);
         $property->booked = true;
         $property->save();
+
+        $user = auth()->user();
+        Mail::to($user->email)->send(new BookingConfirmEmail($user, $property));
+
 
         return redirect()->back()->with('success', 'Property booked successfully!');
     }
