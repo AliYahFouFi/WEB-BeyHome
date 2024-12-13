@@ -11,6 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
         <link href="{{ asset('customCss/card.css') }}" rel="stylesheet">
+
         <style>
 
         </style>
@@ -36,20 +37,22 @@
                                     class="position-absolute top-0 end-0 m-2">
                                     @csrf
                                     {{-- ADD if the user added it change the icon to solid --}}
-                                    <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
-
-                                        <i class="fa-regular fa-heart"></i>
-                                    </button>
+                                    @if (auth()->user())
+                                        @if ($favorites->contains($property->id))
+                                            <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
+                                                <i class="fa-solid fa-heart "></i>
+                                            </button>
+                                        @else
+                                            <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </button>
+                                        @endif
+                                    @endif
                                 </form>
                             </div>
 
-
-
-
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title text-primary">{{ $property->name }}</h5>
-
-
                                 <p class="card-text text-muted mb-3">
                                     {{ $property->description ?? 'No description available.' }}
                                 </p>
@@ -64,10 +67,6 @@
                                 </div>
 
                             </div>
-
-
-
-
 
                             <div class="card-footer bg-light">
                                 <small class="text-muted">Posted {{ $property->created_at->diffForHumans() }} </small>

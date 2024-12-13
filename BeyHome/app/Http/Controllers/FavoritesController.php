@@ -27,7 +27,7 @@ class FavoritesController extends Controller
     {
         $user_id = auth()->user()->id;
         $favoriteItems = Favorite::where('user_id', $user_id)->get();
-        $properties = Property::whereIn('id', $favoriteItems->pluck('property_id'))->get();
+        $properties = Property::whereIn('id', $favoriteItems->pluck('property_id'))->paginate(6);
         return view('favorites', compact('favoriteItems', 'properties'));
     }
     //for removing from favorites
