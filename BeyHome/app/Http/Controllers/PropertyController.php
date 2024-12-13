@@ -23,12 +23,13 @@ class PropertyController extends Controller
         $property = Property::findOrFail($id);
         $reviews = WrittenReviews::where('property_id', $property->id)->get();
         $nbofreviews = Review::where('property_id', $property->id)->count();
+        $similarProperties = Property::where('location', $property->location)->paginate(3);
+
         // $name_of_property_owner = $property->user->name;
-        return view('property-show', compact('property', 'reviews', 'nbofreviews'));
+        return view('property-show', compact('property', 'reviews', 'nbofreviews', "similarProperties"));
     }
 
     /**Filter properties by location ,category and price and number of gusts*/
-
 
     public function filter(Request $request)
     {

@@ -18,7 +18,7 @@ class BookingController extends Controller
             'user_id' => 'required|exists:users,id',
             'start_date' => 'required|date|after_or_equal:today',
             'end_date' => 'required|date|after:start_date',
-            // 'total_price' => 'required',
+            'total_price' => 'required',
         ]);
 
         // Check if the property is already booked for the given dates
@@ -30,7 +30,7 @@ class BookingController extends Controller
             ->exists();
 
         if ($isBooked) {
-            return redirect()->back()->with('This property is already booked for the selected dates.');
+            return redirect()->back()->with('error', 'This property is already booked for the selected dates.');
         }
         // Create the booking
         $booking = Booking::create([
@@ -38,7 +38,7 @@ class BookingController extends Controller
             'user_id' => $request->user_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'total_price' => '200',  // default price
+            'total_price' => $request->total_price,  // default price
             'status' => 'pending',  // default status
         ]);
 
@@ -46,6 +46,6 @@ class BookingController extends Controller
         $property->booked = true;
         $property->save();
 
-        return redirect()->route('home')->with('success', 'Booking created successfully!');
+        return redirect()->back()->with('success', 'Property booked successfully!');
     }
 }
