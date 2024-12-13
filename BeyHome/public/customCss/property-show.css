@@ -1,0 +1,216 @@
+.property-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.property-price {
+    font-size: 1.5rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+.property-description {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.property-title.text-primary.mb-3 {
+    color: black !important;
+}
+
+.card-body {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    color: #fff;
+}
+.btn.btn-primary:active {
+    background-color: #464646;
+    color: #fff;
+}
+.form-container {
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-container input {
+    border: black 1px solid !important;
+}
+
+/* for img slider */
+/* Set a specific height for the carousel */
+.imgSlider .carousel-inner {
+    height: 600px;
+    /* You can adjust this height to your desired value */
+    margin: 20px;
+    border-radius: 10px;
+}
+
+/* Ensure images inside the carousel take the full width and maintain the aspect ratio */
+.imgSlider .carousel-item img {
+    object-fit: cover;
+    /* Ensures the image covers the space without distorting */
+    height: 100%;
+    /* Make sure the image fills the height of the carousel */
+}
+
+.col-12.col-md-6.mb-3 {
+    padding-right: 0px !important;
+}
+
+/* FOR RATING */
+.rating-container {
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.no-rating {
+    font-size: 1.5rem;
+
+    color: gray;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0px;
+}
+
+.rating-label {
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.temp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star.gray {
+    color: gray;
+    /* Gray color for empty stars */
+    display: flex;
+    align-items: center;
+}
+
+.star-con {
+    display: flex;
+}
+
+.add-review-link {
+    text-align: center;
+    align-self: center;
+    font-size: 1.5rem;
+    margin: 10px;
+}
+
+/* testing */
+#review-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+
+    padding: 20px;
+    margin-top: 20px;
+
+    max-width: 500px;
+    /* Limiting width */
+    box-sizing: border-box;
+    /* Ensuring padding and border are included in the width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.star-rating {
+    direction: rtl;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating .star {
+    color: gray;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating input[type="radio"]:checked ~ .star,
+.star-rating input[type="radio"]:hover ~ .star {
+    color: gold;
+}
+
+.star-rating .star:hover,
+.star-rating .star:hover ~ .star {
+    color: gold;
+}
+
+span.star {
+    color: gold;
+}
+
+.star-con {
+    display: flex;
+}
+
+.rating-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 2.2rem;
+    /* box-shadow: black; */
+}
+
+.add-review-link {
+    text-align: center;
+    align-self: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+@media (max-width: 576px) {
+    .star-rating {
+        font-size: 1.5rem;
+    }
+
+    #review-form {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* FOR WRITTEN REVIEW */
+.written-review-input {
+    border: black 1px solid !important;
+}

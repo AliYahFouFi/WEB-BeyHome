@@ -5,16 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
     <title>Property Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="{{ asset('customCss/review.css') }}" rel="stylesheet">
+    <link href="{{ asset('customCss/property-show.css') }}" rel="stylesheet">
 </head>
 
-
 <body>
-    @include('filtered-properties')
-    <!-- Property Details Section -->
+    @include('customLayouts.header')
+
+    <!-- Display any success or error message here -->
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     <div class="container py-5">
         <div class="row">
             <!-- Property Image -->
@@ -53,32 +60,38 @@
         <hr>
         <!-- Property Details -->
         <div class="row">
-            <!-- Left Column -->
+            <!-- Left Column:some information -->
             <div class="col-12 col-md-6 mb-3">
-                <div class="extra-content">
-
-                    <h5>Additional Information</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, sint ipsam autem non
-                        voluptates excepturi error quaerat magni ad magnam in hic similique dicta quisquam
-                        dignissimos assumenda voluptatum accusamus tenetur.</p>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4"> Information</h5>
+                        <p class="d-flex align-items-center mb-3">
+                            <i class="fas fa-user mr-2"></i> <strong>Property Owner: </strong>
+                            {{ $property->user->name }}
+                        </p>
+                        <p class="d-flex align-items-center mb-3">
+                            <i class="fas fa-calendar-alt mr-2"></i> <strong>Date Posted: </strong>
+                            {{ $property->created_at->format('d M Y') }}
+                        </p>
+                        <p class="d-flex align-items-center mb-3">
+                            <i class="fas fa-phone-alt mr-2"></i> <strong>Phone Number: </strong>
+                            {{ $property->user->phone_number }}
+                        </p>
+                        <p class="d-flex align-items-center mb-0">
+                            <i class="fas fa-star mr-2"></i> <strong>Rated By: </strong>
+                            {{ $nbofreviews }}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
-
+                <!-- right Column :property details -->
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <!-- Property Title and Price -->
-
                         <h1 class="property-title text-primary mb-3">{{ $property->name }}</h1>
                         <p class="property-price text-success fw-bold h4">$ {{ number_format($property->price, 2) }}</p>
-
-                        <!-- Property Description -->
                         <p class="property-description text-muted">{{ $property->description }}</p>
-
-                        <!-- Location -->
                         <p class="text-secondary"><strong>Location:</strong> {{ $property->location }}</p>
-
-                        <!-- Details Section -->
                         <div class="details mt-4">
                             <h5 class="text-dark">Details:</h5>
                             <div class="row">
@@ -138,7 +151,7 @@
                     <div class="extra-content">
 
                         <div class="rating-container">
-                            <h5>Rating</h5>
+                            <span class="rating-label">Rating:</span>
                             <div class="star-con">
                                 @switch($property->rating)
                                     @case(0)
@@ -182,9 +195,11 @@
                                     @break
 
                                     @default
-                                        <span>No rating</span>
+                                        <div class="no-rating">
+                                            <span>No</span> <span>Rating</span>
+                                        </div>
                                 @endswitch
-                                <button class="btn btn-primary w-100">
+                                <button class="btn btn-primary w-100  add-review-btn">
                                     <a href="#" id="add-review-link"
                                         class="add-review-link text-white text-decoration-none ">add
                                         rating</a>
@@ -215,19 +230,10 @@
                     </div>
                 </div>
 
-
                 <!-- Right Column: Booking Form -->
                 <div class="col-12 col-md-6 mb-3">
                     <div class="form-container">
                         <h4 class="mb-4">Booking</h4>
-
-                        <!-- Display any success or error message here -->
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @elseif(session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
-
                         <form action="{{ route('bookings.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="total_price" id="total_price"
@@ -252,23 +258,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-primary w-100">Book Now</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
-        <hr>
-
-
-        {{-- Review Section --}}
-
-
-
-
-
         <script>
             // Toggle the rating form
             document.getElementById('add-review-link').addEventListener('click', function(event) {
@@ -277,178 +272,122 @@
                 reviewForm.style.display = reviewForm.style.display === 'block' ? 'none' : 'block';
             });
         </script>
-
         <hr>
 
-        {{-- WRITEN REVIEW --}}
+        {{-- WRITTEN REVIEW --}}
         <div class="reviews-dropdown">
-            <button class="dropdown-toggle" id="dropdown-toggle">
-                Reviews
-                <span class="arrow">&#9662;</span>
-            </button>
-            <div class="dropdown-content" id="dropdown-content" style="display: none;">
+            <div id="responseMessage"></div>
+
+            {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdown-toggle"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Reviews
+            </button> --}}
+            <h1>People Reviews</h1>
+            <div class="dropdown-content" id="dropdown-content">
                 <!-- Loop through reviews and display them here -->
-                @foreach ($reviews as $review)
-                    <div class="review">
-                        <div class="nametime">
-                            <strong>{{ $review->user->name }}</strong>
-                            <span class="time">{{ $review->created_at->diffForHumans() }}</span>
-                        </div>
-                        <p class="review-text" style="font-size: 17px;">{{ $review->review }}</p>
+                <div class="container">
+                    <div class="row" id="reviews-container">
+                        @foreach ($reviews as $review)
+                            <div class="col-md-6 mb-3 review">
+                                <div class="dropdown-item border p-3 rounded">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>{{ $review->user->name }}</strong>
+                                        <span class="text-muted">{{ $review->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="mb-0">{{ $review->review }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
                 <!-- Write a review form -->
                 <div>
                     <hr>
-                    <strong style="margin-bottom: 10px;">Write a review</strong>
-                    <form id="writtenreview-form"
-                        action="{{ route('WrittenReviews.store', ['property' => $property->id]) }}" method="POST">
-                        @csrf
-                        <input type="text" name="review" id="review" placeholder="Write a review"
-                            class="input-review">
-                        <button type="submit" class="add-to-cart" style="margin-bottom:0;">Submit</button>
-                    </form>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+                                <form id="writtenreview-form"
+                                    action="{{ route('WrittenReviews.store', ['property' => $property->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    <input type="text" name="review" id="review"
+                                        placeholder="Write a review?"
+                                        class="input-review form-control mb-3 written-review-input">
+                                    <button type="submit" class="btn btn-primary w-100">Submit Review</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Handle the form submission via AJAX [need some more fixing]
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('writtenreview-form').addEventListener('submit', function(event) {
+                                event.preventDefault(); // Prevent the default form submission
+
+                                let form = event.target;
+                                let formData = new FormData(form);
+
+                                fetch(form.action, {
+                                        method: 'POST',
+                                        body: formData,
+                                        headers: {
+                                            'X-CSRF-TOKEN': formData.get('_token')
+                                        }
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        let responseMessage = document.getElementById('responseMessage');
+                                        if (data.success) {
+                                            // Create the new review element
+                                            let reviewDiv = document.createElement('div');
+                                            reviewDiv.classList.add('col-md-6', 'mb-3', 'review');
+
+                                            reviewDiv.innerHTML = `
+                                <div class="dropdown-item border p-3 rounded">
+                                     <div class="d-flex justify-content-between">
+                                        <strong>${data.user_name}</strong>
+                                           <span class="text-muted">${data.created_at}</span>
+                                   </div><p class="mb-0">${data.review}</p> 
+                                </div>`;
+
+                                            // Add the new review to the reviews container
+                                            const reviewsContainer = document.querySelector('#reviews-container');
+                                            reviewsContainer.prepend(reviewDiv);
+
+                                            // Clear the input field
+                                            document.getElementById('review').value = '';
+
+                                            // Display success message
+                                            responseMessage.innerText = 'Review submitted successfully!';
+                                            responseMessage.style.color = 'green';
+                                        } else {
+                                            // Display error message 
+                                            responseMessage.innerText = 'Error: ' + data.message;
+                                            responseMessage.style.color = 'red';
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error:', error);
+                                        let responseMessage = document.getElementById('responseMessageWritten');
+                                        responseMessage.innerText = 'Error adding review.';
+                                        responseMessage.style.color = 'red';
+                                    });
+                            });
+                        });
+                    </script>
+
                 </div>
-                <div id="responseMessageWritten" style="display: none;"></div>
+
+
+                <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
             </div>
         </div>
-
-        <script>
-            // Toggle the dropdown
-            document.getElementById('dropdown-toggle').addEventListener('click', function() {
-                var content = document.getElementById('dropdown-content');
-                content.style.display = content.style.display === 'none' ? 'block' : 'none';
-            });
-
-            // Handle the form submission via AJAX
-            document.getElementById('writtenreview-form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                let form = event.target;
-                let formData = new FormData(form);
-
-                fetch(form.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRF-TOKEN': formData.get('_token')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        let responseMessage = document.getElementById('responseMessage');
-                        if (data.success) {
-                            // Display the new review in the dropdown
-                            let reviewDiv = document.createElement('div');
-                            reviewDiv.classList.add('review');
-                            reviewDiv.innerHTML = `<strong>${data.user_name}</strong>:<p>${data.review}</p>`;
-                            document.getElementById('dropdown-content').prepend(reviewDiv);
-
-                            // Clear the input field
-                            document.getElementById('review').value = '';
-
-                            // Display success message
-                            responseMessage.innerText = 'Review submitted successfully!';
-                            responseMessage.style.color = 'green';
-                        } else {
-                            // Display error message
-                            responseMessage.innerText = 'Error: ' + data.message;
-                            responseMessage.style.color = 'red';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        let responseMessage = document.getElementById('responseMessageWritten');
-                        responseMessage.innerText = 'Error adding review.';
-                        responseMessage.style.color = 'red';
-                    });
-            });
-        </script>
-
     </div>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    @include('customLayouts.footer')
 </body>
 
-<style>
-    .property-title {
-        font-size: 2rem;
-        font-weight: bold;
-    }
 
-    .property-price {
-        font-size: 1.5rem;
-        color: #28a745;
-        margin-bottom: 1rem;
-    }
-
-    .property-description {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-    }
-
-
-
-    .property-title.text-primary.mb-3 {
-        color: black !important;
-    }
-
-    .card-body {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 100%;
-    }
-
-    .btn-primary:hover {
-        background-color: #333;
-        color: #fff;
-    }
-
-    .form-container {
-        padding: 2rem;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 100%;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-container input {
-        border: black 1px solid !important;
-    }
-
-    /* for img slider */
-    /* Set a specific height for the carousel */
-    .imgSlider .carousel-inner {
-        height: 600px;
-        /* You can adjust this height to your desired value */
-        margin: 20px;
-        border-radius: 10px;
-    }
-
-    /* Ensure images inside the carousel take the full width and maintain the aspect ratio */
-    .imgSlider .carousel-item img {
-        object-fit: cover;
-        /* Ensures the image covers the space without distorting */
-        height: 100%;
-        /* Make sure the image fills the height of the carousel */
-    }
-
-
-    .col-12.col-md-6.mb-3 {
-        padding-right: 0px !important;
-    }
-
-
-    /* FOR RATING */
-    .rating-container {
-        padding: 15px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 100%;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-</style>
 
 </html>

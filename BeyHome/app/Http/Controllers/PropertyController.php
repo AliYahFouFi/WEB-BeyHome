@@ -15,13 +15,16 @@ class PropertyController extends Controller
      * @param  int  $id
      * @return \Illuminate\View\View
      */
+
+
     public function show($id)
     {
         // Find the property by its ID
         $property = Property::findOrFail($id);
         $reviews = WrittenReviews::where('property_id', $property->id)->get();
-
-        return view('property-show', compact('property', 'reviews'));
+        $nbofreviews = Review::where('property_id', $property->id)->count();
+        // $name_of_property_owner = $property->user->name;
+        return view('property-show', compact('property', 'reviews', 'nbofreviews'));
     }
 
     /**Filter properties by location ,category and price and number of gusts*/

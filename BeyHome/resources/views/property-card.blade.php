@@ -27,7 +27,7 @@
 
                             <div class="card-img-container position-relative">
                                 <img src="{{ $property->image ?? 'https://picsum.photos/200/100' }}"
-                                    class="card-img-top rounded-top" alt="{{ $property->name }}">
+                                    class="card-img-top rounded-top" alt="{{ $property->name }}" loading="lazy">
                                 <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
                                     {{ $property->booked ? 'Booked' : 'Available' }}
                                 </div>
@@ -70,7 +70,7 @@
 
 
                             <div class="card-footer bg-light">
-                                <small class="text-muted">Last updated {{ $property->updated_at->diffForHumans() }}</small>
+                                <small class="text-muted">Posted {{ $property->created_at->diffForHumans() }} </small>
                             </div>
                         </div>
                     </div>
