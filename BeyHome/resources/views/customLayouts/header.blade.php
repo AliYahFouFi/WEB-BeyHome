@@ -50,7 +50,7 @@
                                 @csrf
                                 <li class="nav-item"><button type="submit" class="btn btn-light">Logout</button> </li>
                             </form>
-                            <li class="nav-item"> <a href="" class="nav-link">Add Property</a>
+                            <li class="nav-item"> <a href="/properties/create" class="nav-link">Add Property</a>
                             <li></li>
                         @endauth
                     </ul>
@@ -60,7 +60,6 @@
                     </div>
                 </div>
             </nav>
-            <div> @include('filtered-properties')</div>
         </header>
         <!-- end header section -->
 
