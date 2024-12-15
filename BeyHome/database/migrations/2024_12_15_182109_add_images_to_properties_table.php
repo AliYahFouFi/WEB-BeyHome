@@ -12,20 +12,15 @@ return new class extends Migration
     public function up()
     {
         Schema::table('properties', function (Blueprint $table) {
-            // Check if the column doesn't exist before adding it
-            if (!Schema::hasColumn('properties', 'number_of_guests')) {
-                $table->integer('number_of_guests')->nullable();
-            }
+            $table->json('images')->nullable();  // Use `json` type if using a database that supports it (like MySQL 5.7+)
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    
+    public function down()
     {
         Schema::table('properties', function (Blueprint $table) {
-            //
+            $table->dropColumn('images');
         });
     }
+    
 };

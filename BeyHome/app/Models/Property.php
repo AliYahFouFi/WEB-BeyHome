@@ -10,19 +10,11 @@ class Property extends Model
 {
     //
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'category',
-        'user_id',
-        'rating',
-        'location',
-        'area',
-        'bedrooms',
-        'bathrooms',
-        'parking_spaces',
-        'furnished',
+        'name', 'description', 'price', 'category', 'location',
+        'area', 'bedrooms', 'bathrooms', 'parking_spaces',
+        'furnished', 'number_of_guests', 'user_id', 'images',
     ];
+    
 
     public function writtenReviews()
     {

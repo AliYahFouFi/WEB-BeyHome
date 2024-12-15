@@ -20,6 +20,7 @@ use App\Http\Controllers\FavoritesController;
 |
 */
 
+
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -56,3 +57,8 @@ require __DIR__ . '/auth.php';
 Route::get('/test', function () {
     return view('shop');
 })->middleware('host');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
+    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+});

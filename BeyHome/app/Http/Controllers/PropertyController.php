@@ -70,4 +70,48 @@ class PropertyController extends Controller
         $favorites = 0;
         return view('filtered-properties-page', compact('properties'));
     }
+
+    public function create(){
+        return view('customLayouts.create-property');
+    }
+
+    public function store(Request $request)
+    {
+        // Validate the request (including images and the name field)
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'category' => 'required|string',
+            'location' => 'required|string',
+            'area' => 'nullable|numeric',
+            'bedrooms' => 'nullable|integer',
+            'bathrooms' => 'nullable|integer',
+            'parking_spaces' => 'nullable|integer',
+            'furnished' => 'boolean',
+            'number_of_guests' => 'nullable|integer',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:10240',
+        ]);
+    
+        // Handle multiple image uploads
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                // Store each image and push the path into the $imagePaths array
+                $imagePaths[] = $image->store('properties', 'public');
+            }
+        }
+    
+        // Prepare the data to be stored
+        $validated['user_id'] = auth()->id();  // Assuming the user is authenticated
+        $validated['images'] = json_encode($imagePaths);  // Store the image paths as a JSON array
+    
+        // Create the property with the validated data
+        Property::create($validated);
+    
+        return redirect()->route('home')->with('success', 'Property added successfully!');
+    }
+    
+
 }

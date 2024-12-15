@@ -27,8 +27,13 @@
                         <div class="card h-100 shadow-lg border-0 position-relative">
 
                             <div class="card-img-container position-relative">
-                                <img src="{{ $property->image ?? 'https://picsum.photos/200/100' }}"
-                                    class="card-img-top rounded-top" alt="{{ $property->name }}" loading="lazy">
+                                @if($property->images)
+                                @foreach(json_decode($property->images) as $image)
+                                    <img src="{{ asset('storage/' . $image) }}" class="card-img-top rounded-top" alt="{{ $property->name }}" loading="lazy">
+                                @endforeach
+                                @else
+                                    <img src="https://picsum.photos/200/100" class="card-img-top rounded-top" alt="Default image" loading="lazy">
+                                @endif
                                 <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
                                     {{ $property->booked ? 'Booked' : 'Available' }}
                                 </div>
