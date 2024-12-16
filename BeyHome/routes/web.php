@@ -42,6 +42,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/properties/{property}/reviews/store', [ReviewController::class, 'storeReview'])->name('WrittenReviews.store');
 });
 
+//for adding properties
+Route::middleware(['host'])->group(function () {
+    Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
+    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+});
+
 
 //BREEZE
 Route::middleware('auth')->group(function () {
@@ -57,8 +63,3 @@ require __DIR__ . '/auth.php';
 Route::get('/test', function () {
     return view('shop');
 })->middleware('host');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
-    Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
-});

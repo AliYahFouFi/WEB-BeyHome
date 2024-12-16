@@ -22,6 +22,21 @@
 <body>
 
     @include('customLayouts.header')
+    @include('filtered-properties')
+
+    <div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
 
     <!-- slider section -->
     <section class="slider_section">
@@ -136,19 +151,6 @@
     <!-- end slider section -->
 
 
-    <div>
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-    </div>
 
     <div>
         @yield('content')
