@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('customCss/header.css') }}" rel="stylesheet">
-    <title>Document</title>
+    <title>filter</title>
 
 </head>
 

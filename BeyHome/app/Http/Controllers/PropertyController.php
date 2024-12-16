@@ -24,7 +24,6 @@ class PropertyController extends Controller
         $reviews = WrittenReviews::where('property_id', $property->id)->get();
         $nbofreviews = Review::where('property_id', $property->id)->count();
         $similarProperties = Property::where('location', $property->location)->paginate(3);
-
         // $name_of_property_owner = $property->user->name;
         return view('property-show', compact('property', 'reviews', 'nbofreviews', "similarProperties"));
     }
@@ -112,5 +111,11 @@ class PropertyController extends Controller
         Property::create($validated);
 
         return redirect()->route('home')->with('success', 'Property added successfully!');
+    }
+
+    public function showHostProperties()
+    {
+        $properties = Property::where('user_id', auth()->user()->id)->paginate(6);
+        return view('customLayouts.host-properties', compact('properties'));
     }
 }

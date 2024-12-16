@@ -27,12 +27,14 @@
                         <div class="card h-100 shadow-lg border-0 position-relative">
 
                             <div class="card-img-container position-relative">
-                                @if($property->images)
-                                @foreach(json_decode($property->images) as $image)
-                                    <img src="{{ asset('storage/' . $image) }}" class="card-img-top rounded-top" alt="{{ $property->name }}" loading="lazy">
-                                @endforeach
+                                @if ($property->images)
+                                    @foreach (json_decode($property->images) as $image)
+                                        <img src="{{ asset('storage/' . $image) }}" class="card-img-top rounded-top"
+                                            alt="{{ $property->name }}" loading="lazy">
+                                    @endforeach
                                 @else
-                                    <img src="https://picsum.photos/200/100" class="card-img-top rounded-top" alt="Default image" loading="lazy">
+                                    <img src="https://picsum.photos/200/100" class="card-img-top rounded-top"
+                                        alt="Default image" loading="lazy">
                                 @endif
                                 <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
                                     {{ $property->booked ? 'Booked' : 'Available' }}
@@ -41,7 +43,6 @@
                                 <form action="{{ route('favorites.store', $property->id) }}" method="POST"
                                     class="position-absolute top-0 end-0 m-2">
                                     @csrf
-                                    {{-- ADD if the user added it change the icon to solid --}}
                                     @if (auth()->user())
                                         @if ($favorites->contains($property->id))
                                             <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
