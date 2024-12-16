@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('price', 15, 2); // price (decimal to handle large amounts and two decimal places)
             $table->string('category'); // category (string)
             $table->unsignedBigInteger('user_id'); // user_id (Foreign Key to users table)
-            $table->decimal('rating', 3, 2)->nullable(); // rating (e.g., 4.5 out of 5)
+            $table->decimal('rating', 3, 2)->nullable(); // 
             $table->string('location'); // location (string)
             $table->decimal('area', 10, 2)->nullable(); // area (e.g., 1200.50 sq. ft.)
             $table->integer('bedrooms')->default(0); // bedrooms

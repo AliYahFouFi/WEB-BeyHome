@@ -51,7 +51,7 @@
 .imgSlider .carousel-inner {
     height: 600px;
     /* You can adjust this height to your desired value */
-    margin: 20px;
+
     border-radius: 10px;
 }
 
@@ -75,6 +75,11 @@
     border-radius: 5px;
     width: 100%;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 2.2rem;
+    flex-wrap: wrap;
 }
 
 .no-rating {
@@ -182,14 +187,6 @@ span.star {
 
 .star-con {
     display: flex;
-}
-
-.rating-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 2.2rem;
-    /* box-shadow: black; */
 }
 
 .add-review-link {

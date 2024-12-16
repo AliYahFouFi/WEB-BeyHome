@@ -40,7 +40,7 @@ class BookingController extends Controller
             'user_id' => $request->user_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'total_price' => $request->total_price,  // default price
+            'total_price' => $request->total_price,
             'status' => 'pending',  // default status
         ]);
 

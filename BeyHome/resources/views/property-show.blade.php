@@ -37,22 +37,24 @@
                 </div>
                 <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @foreach(json_decode($property->images) as $index => $image)
+                        @foreach (json_decode($property->images) as $index => $image)
                             <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                 <img src="{{ asset('storage/' . $image) }}" class="d-block w-100" alt="Property Image">
                             </div>
                         @endforeach
                     </div>
                     <!-- Carousel controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
-                </div>                
+                </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                     data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -73,19 +75,19 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
                         <h5 class="card-title mb-4"> Information</h5>
-                        <p class="d-flex align-items-center mb-3">
+                        <p class="d-flex align-items-center mb-3" style="gap: 5px">
                             <i class="fas fa-user mr-2"></i> <strong>Property Owner: </strong>
                             {{ $property->user->name }}
                         </p>
-                        <p class="d-flex align-items-center mb-3">
+                        <p class="d-flex align-items-center mb-3" style="gap: 5px">
                             <i class="fas fa-calendar-alt mr-2"></i> <strong>Date Posted: </strong>
                             {{ $property->created_at->format('d M Y') }}
                         </p>
-                        <p class="d-flex align-items-center mb-3">
+                        <p class="d-flex align-items-center mb-3" style="gap: 5px">
                             <i class="fas fa-phone-alt mr-2"></i> <strong>Phone Number: </strong>
                             {{ $property->user->phone_number }}
                         </p>
-                        <p class="d-flex align-items-center mb-0">
+                        <p class="d-flex align-items-center mb-0" style="gap: 5px">
                             <i class="fas fa-star mr-2"></i> <strong>Rated By: </strong>
                             {{ $nbofreviews }}
                         </p>
@@ -97,38 +99,39 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
                         <h1 class="property-title text-primary mb-3">{{ $property->name }}</h1>
-                        <p class="property-price text-success fw-bold h4">$ {{ number_format($property->price, 2) }}</p>
+                        <p class="property-price text-success fw-bold h4">$ {{ number_format($property->price, 2) }}
+                        </p>
                         <p class="property-description text-muted">{{ $property->description }}</p>
                         <p class="text-secondary"><strong>Location:</strong> {{ $property->location }}</p>
                         <div class="details mt-4">
                             <h5 class="text-dark">Details:</h5>
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" style="gap: 5px">
                                         <i class="fas fa-map-marker-alt mr-2"></i>
                                         <span><strong>Area:</strong> {{ $property->area }} sq. ft.</span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" style="gap: 5px">
                                         <i class="fas fa-bed mr-2"></i>
                                         <span><strong>Bedrooms:</strong> {{ $property->bedrooms }}</span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" style="gap: 5px">
                                         <i class="fas fa-bath mr-2"></i>
                                         <span><strong>Bathrooms:</strong> {{ $property->bathrooms }}</span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" style="gap: 5px">
                                         <i class="fas fa-car mr-2"></i>
                                         <span><strong>Parking Spaces:</strong> {{ $property->parking_spaces }}</span>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center" style="gap: 5px">
                                         <i class="fas fa-couch mr-2"></i>
                                         <span><strong>Furnished:</strong>
                                             {{ $property->furnished ? 'Yes' : 'No' }}</span>

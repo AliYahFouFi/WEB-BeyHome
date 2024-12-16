@@ -71,7 +71,8 @@ class PropertyController extends Controller
         return view('filtered-properties-page', compact('properties'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('customLayouts.create-property');
     }
 
@@ -93,7 +94,7 @@ class PropertyController extends Controller
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:10240',
         ]);
-    
+
         // Handle multiple image uploads
         $imagePaths = [];
         if ($request->hasFile('images')) {
@@ -102,16 +103,14 @@ class PropertyController extends Controller
                 $imagePaths[] = $image->store('properties', 'public');
             }
         }
-    
+
         // Prepare the data to be stored
-        $validated['user_id'] = auth()->id();  // Assuming the user is authenticated
+        $validated['user_id'] = auth()->id();
         $validated['images'] = json_encode($imagePaths);  // Store the image paths as a JSON array
-    
+        $validated['rating'] = 0;
         // Create the property with the validated data
         Property::create($validated);
-    
+
         return redirect()->route('home')->with('success', 'Property added successfully!');
     }
-    
-
 }

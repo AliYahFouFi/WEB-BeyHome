@@ -50,8 +50,10 @@
                                 @csrf
                                 <li class="nav-item"><button type="submit" class="btn btn-light">Logout</button> </li>
                             </form>
-                            <li class="nav-item"> <a href="/properties/create" class="nav-link">Add Property</a>
-                            <li></li>
+                            @if (Auth::user()->role == 'host')
+                                <li class="nav-item"> <a href="/properties/create" class="nav-link">Add Property</a>
+                                </li>
+                            @endif
                         @endauth
                     </ul>
                     <div class="user_option">
@@ -64,6 +66,7 @@
         <!-- end header section -->
 
     </div>
+    {{-- @include('filtered-properties') --}}
 </body>
 
 </html>
