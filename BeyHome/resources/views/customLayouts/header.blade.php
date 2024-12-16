@@ -53,20 +53,18 @@
                             @if (Auth::user()->role == 'host')
                                 <li class="nav-item"> <a href="/properties/create" class="nav-link">Add Property</a>
                                 </li>
+
+                                <li><a href="{{ route('properties.showHost') }}" class="nav-link">My Properties</a></li>
                             @endif
                         @endauth
                     </ul>
                     <div class="user_option">
-
-
                     </div>
                 </div>
             </nav>
         </header>
-        <!-- end header section -->
-
     </div>
-    {{-- @include('filtered-properties') --}}
+
 </body>
 
 </html>

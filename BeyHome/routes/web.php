@@ -42,10 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/properties/{property}/reviews/store', [ReviewController::class, 'storeReview'])->name('WrittenReviews.store');
 });
 
-//for adding properties
+//for host
 Route::middleware(['host'])->group(function () {
     Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
+    Route::get('/properties/host', [PropertyController::class, 'showHostProperties'])->name('properties.showHost');
 });
 
 
@@ -61,5 +62,5 @@ require __DIR__ . '/auth.php';
 
 //for testing
 Route::get('/test', function () {
-    return view('shop');
-})->middleware('host');
+    return view('testimonial');
+});

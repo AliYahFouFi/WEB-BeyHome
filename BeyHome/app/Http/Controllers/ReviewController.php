@@ -18,6 +18,11 @@ class ReviewController extends Controller
         ]);
 
         $hasReview = Review::where('user_id', auth()->user()->id)->where('property_id', $property->id)->exists();
+
+        if ($property->user_id == auth()->user()->id) {
+            return redirect()->back()->with('error', 'cannot rate your own property.');
+        }
+
         if ($hasReview) {
             return redirect()->back()->with('error', 'You have already rated this property.');
         }

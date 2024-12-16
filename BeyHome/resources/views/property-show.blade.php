@@ -15,7 +15,7 @@
 
 <body>
     @include('customLayouts.header')
-
+    @include('customLayouts.filter')
     <!-- Display any success or error message here -->
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
