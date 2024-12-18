@@ -11,6 +11,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('customCss/property-show.css') }}" rel="stylesheet">
     <link href="{{ asset('customCss/card.css') }}" rel="stylesheet">
+    {{-- for map --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
 </head>
 
 <body>
@@ -394,7 +397,33 @@
         </div>
 
         <hr>
+        {{-- MAP --}}
+        <div>
+            <h2 class="text-center">Location</h2>
+            <div id="map" style="height: 500px; width: 100%;"></div>
 
+            <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+            <script>
+                var lat = {{ $property->latitude }};
+                var lon = {{ $property->longitude }};
+
+                // Initialize the map and set the view based on the coordinates
+                var map = L.map('map').setView([lat, lon], 13);
+
+                // Add OpenStreetMap tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Add a marker at the property location
+                var marker = L.marker([lat, lon]).addTo(map);
+                // Optionally, you can add a popup to the marker
+                marker.bindPopup("{{ $property->name }}").openPopup();
+            </script>
+
+            <hr>
+        </div>
         <div>
             <h2 class="text-center">Similar Properties</h2>
             <div class="container py-5">
@@ -458,9 +487,9 @@
 
         </div>
     </div>
-    @include('customLayouts.footer')
 </body>
 
 
+<footer> @include('customLayouts.footer')</footer>
 
 </html>
