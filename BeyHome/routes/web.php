@@ -60,7 +60,11 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 require __DIR__ . '/auth.php';
 
 
+
+
+Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
+
 //for testing
 Route::get('/test', function () {
-    return view('testimonial');
+    return view('map-test');
 });

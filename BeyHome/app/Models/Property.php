@@ -24,6 +24,9 @@ class Property extends Model
         'user_id',
         'images',
         'rating',
+        'latitude',
+        'longitude',
+
     ];
 
 

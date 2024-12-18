@@ -92,6 +92,8 @@ class PropertyController extends Controller
             'number_of_guests' => 'nullable|integer',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:10240',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ]);
 
         // Handle multiple image uploads
