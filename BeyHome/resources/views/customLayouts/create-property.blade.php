@@ -14,6 +14,10 @@
 
 
     <style>
+        .user_option {
+            margin-left: 620px !important;
+        }
+
         body {
             background-color: #f9f9f9;
             color: #333;
@@ -119,7 +123,14 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="category" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="category" name="category" required>
+                    <select class="form-control" id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="Apartments">Apartments </option>
+                        <option value="Historical">Historical Home</option>
+                        <option value="Chalets">Chalets</option>
+                        <option value="Beachfront">Beachfront </option>
+                        <option value="Villas">Villas</option>
+                    </select>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="location" class="form-label">Location</label>
@@ -200,7 +211,7 @@
                         marker = L.marker(e.latlng).addTo(map); // Add new marker
                     }
 
-                    // Optionally, add a popup to the marker
+                    //  popup to the marker
                     marker.bindPopup("Selected Location:<br>Lat: " + lat + "<br>Lon: " + lon).openPopup();
                 });
             </script>
@@ -209,12 +220,6 @@
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
-
-
-
-
-
-
 
     <footer>
         @include('customLayouts.footer')
