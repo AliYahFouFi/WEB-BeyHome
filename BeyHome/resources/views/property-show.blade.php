@@ -400,7 +400,8 @@
         {{-- MAP --}}
         <div>
             <h2 class="text-center">Location</h2>
-            <div id="map" style="height: 500px; width: 100%;"></div>
+            <div id="map" style="height: 500px; width: 100%; border: 1px solid #ccc ; border-radius: 5px">
+            </div>
 
             <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 

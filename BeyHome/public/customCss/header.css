@@ -56,3 +56,11 @@ select:focus {
     background-color: #464646 !important;
     color: #fff;
 }
+
+.user_option {
+    margin-left: 620px !important;
+}
+.text-light.dropdown-item:hover {
+    color: black !important; /* Change text color on hover */
+    background-color: white !important; /* Change background color on hover */
+}

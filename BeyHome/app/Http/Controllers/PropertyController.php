@@ -24,11 +24,10 @@ class PropertyController extends Controller
         $reviews = WrittenReviews::where('property_id', $property->id)->get();
         $nbofreviews = Review::where('property_id', $property->id)->count();
         $similarProperties = Property::where('location', $property->location)->paginate(3);
-        // $name_of_property_owner = $property->user->name;
         return view('property-show', compact('property', 'reviews', 'nbofreviews', "similarProperties"));
     }
 
-    /**Filter properties by location ,category and price and number of gusts*/
+    /**Filter properties by location,price and number of gusts*/
 
     public function filter(Request $request)
     {
@@ -40,7 +39,6 @@ class PropertyController extends Controller
 
         // Apply filters based on user input
         $query = Property::query();
-
 
         if (!empty($locations)) {
             if ($locations[0] == 'all') {
@@ -77,7 +75,7 @@ class PropertyController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request (including images and the name field)
+        // Validate the request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -109,7 +107,6 @@ class PropertyController extends Controller
         $validated['user_id'] = auth()->id();
         $validated['images'] = json_encode($imagePaths);  // Store the image paths as a JSON array
         $validated['rating'] = 0;
-        // Create the property with the validated data
         Property::create($validated);
 
         return redirect()->route('home')->with('success', 'Property added successfully!');
