@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('customCss/card.css') }}" rel="stylesheet">
     <title>Your Favorite List</title>
     <style>
         body {
@@ -20,125 +23,113 @@
             margin-top: 20px;
         }
 
-        .alert {
-            background-color: #dff0d8;
-            color: #3c763d;
-            padding: 15px;
-            margin: 20px;
-            border: 1px solid #d6e9c6;
-            border-radius: 5px;
+        .btn.btn-danger {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .user_option {
+            margin-left: 620px !important;
+        }
+
+        .text-center {
             text-align: center;
+            margin-top: 20px;
         }
 
-        .wishlist-container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .wishlist-container h2 {
+        .ef {
             text-align: center;
-            color: #333;
-        }
-
-        .wishlist-container ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .wishlist-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .wishlist-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .wishlist-item-info {
-            flex: 1;
-            margin-left: 20px;
-        }
-
-        .wishlist-item-name {
-            font-size: 18px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .wishlist-item-name:hover {
-            text-decoration: underline;
-        }
-
-        .remove-from-wishlist-form {
-            margin-left: 10px;
-        }
-
-        .remove-from-wishlist-form button {
-            padding: 10px 15px;
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .remove-from-wishlist-form button:hover {
-            background-color: #c0392b;
-        }
-
-        p {
-            text-align: center;
-            color: #777;
+            margin-bottom: 200px;
+            margin-top: 200px;
         }
     </style>
 </head>
+<header>@include('customLayouts.header')</header>
 
 <body>
-    <h1>Your Favorite List</h1>
+    <h1>Your Favorite Properties</h1>
 
-    @if (session('message'))
-        <div class="alert">
-            {{ session('message') }}
-        </div>
-    @endif
-
+    <div>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
     @if ($favoriteItems->isEmpty())
-        <p>Your Favorite list is empty.</p>
+        <div class="ef">
+            <h2 class="text-center">Added Favorites will be shown here</h2>
+        </div>
     @else
-        <div class="wishlist-container">
-            <h2>Your Favorites</h2>
-            <ul>
+        <div class="container py-5">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+
                 @foreach ($properties as $property)
-                    <li class="wishlist-item">
-                        <img src="#" alt="Property Image">
-                        <div class="wishlist-item-info">
-                            <ul>
-                                <li>Name: {{ $property->name }}</li>
-                                <li>Price: {{ $property->price }}</li>
-                                <li>Booked: {{ $property->booked ? 'Yes' : 'No' }}</li>
-                            </ul>
+                    <div class="col">
+                        <div class="card h-100 shadow-lg border-0 position-relative">
+
+                            <div class="card-img-container position-relative">
+                                @if ($property->images)
+                                    @foreach (json_decode($property->images) as $image)
+                                        <img src="{{ asset('storage/' . $image) }}" class="card-img-top rounded-top"
+                                            alt="{{ $property->name }}" loading="lazy">
+                                    @endforeach
+                                @else
+                                    <img src="https://picsum.photos/200/100" class="card-img-top rounded-top"
+                                        alt="Default image" loading="lazy">
+                                @endif
+                                <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
+                                    {{ $property->booked ? 'Booked' : 'Available' }}
+                                </div>
+                                <!-- Heart Icon -->
+
+                            </div>
+
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-primary">{{ $property->name }}</h5>
+                                <p class="card-text text-muted mb-3">
+                                    {{ $property->description ?? 'No description available.' }}
+                                </p>
+                                <div> <strong>Only For:</strong> ${{ number_format($property->price, 2) }}</div>
+
+                                <p><strong>Located at: </strong>{{ $property->location }}</p>
+                                <div class="mt-auto">
+                                    <a href="{{ route('property.show', ['id' => $property->id]) }}"
+                                        class="btn btn-outline-primary w-100 hover-black">
+                                        View Property
+                                    </a>
+                                    <form action="{{ route('favorites.destroy', $property->id) }}" method="POST"
+                                        class="remove-from-wishlist-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer bg-light">
+                                <small class="text-muted">Posted {{ $property->created_at->diffForHumans() }} </small>
+                            </div>
                         </div>
-                        <form action="{{ route('favorites.destroy', $property->id) }}" method="POST"
-                            class="remove-from-wishlist-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Remove</button>
-                        </form>
-                    </li>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
+
+
+            <div class="pagination mt-4">
+                {{ $properties->links('pagination::bootstrap-4') }}
+            </div>
+        </div>
     @endif
     </div>
 </body>
+
+<footer> @include('customLayouts.footer')</footer>
 
 </html>

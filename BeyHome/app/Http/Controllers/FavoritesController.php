@@ -34,6 +34,6 @@ class FavoritesController extends Controller
     public function destroy(Property $property)
     {
         $temp = Favorite::where('user_id', auth()->user()->id)->where('property_id', $property->id)->delete();
-        return redirect()->back()->with('success', 'Item removed from favorites list.');
+        return redirect()->back()->with('success', 'property removed successfully.');
     }
 }
