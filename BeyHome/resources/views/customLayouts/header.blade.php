@@ -75,6 +75,13 @@
                                                 Properties</a>
                                         </li>
                                     @endif
+
+                                    @if (Auth::user()->is_admin)
+                                        <li>
+                                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item text-light">Admin
+                                                Panel</a>
+                                        </li>
+                                    @endif
                                 @endauth
                             </ul>
                         </li>

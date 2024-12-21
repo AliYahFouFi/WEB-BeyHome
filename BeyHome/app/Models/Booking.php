@@ -18,4 +18,14 @@ class Booking extends Model
         'total_price',
         'status',
     ];
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

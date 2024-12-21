@@ -7,6 +7,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -65,6 +66,17 @@ require __DIR__ . '/auth.php';
 Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
 
 //for testing
-Route::get('/test', function () {
-    return view('map-test');
+Route::get('/admin', function () {
+    return view('admin/dashboard');
+})->middleware('admin');
+
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/properties', [AdminController::class, 'showProperties'])->name('admin.showProperties');
+    Route::delete('/admin/properties/{id}', [AdminController::class, 'destroyProperty'])->name('admin.properties.destroy');
+    Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('admin.showUsers');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroy');
+    Route::get('/admin/bookings', [AdminController::class, 'showBookings'])->name('admin.showBookings');
+    Route::delete('/admin/bookings/{id}', [AdminController::class, 'destroyBooking'])->name('admin.bookings.destroy');
 });
