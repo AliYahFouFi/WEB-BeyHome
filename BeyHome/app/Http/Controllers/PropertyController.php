@@ -115,6 +115,14 @@ class PropertyController extends Controller
     public function showHostProperties()
     {
         $properties = Property::where('user_id', auth()->user()->id)->paginate(6);
+
         return view('customLayouts.host-properties', compact('properties'));
+    }
+
+    public function destroy($id)
+    {
+        $property = Property::findOrFail($id);
+        $property->delete();
+        return redirect()->back()->with('success', 'Property deleted successfully!');
     }
 }

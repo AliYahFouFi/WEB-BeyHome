@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
+
+    <link href="{{ asset('customCss/header.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -27,7 +27,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto"> <!-- Added ms-auto to align items to the right -->
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('home') }}">Home <span
                                     class="sr-only">(current)</span></a>
@@ -91,7 +91,7 @@
             </nav>
         </header>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

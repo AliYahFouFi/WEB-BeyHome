@@ -17,8 +17,21 @@
             <tbody>
                 @foreach ($bookings as $booking)
                     <tr>
-                        <td>{{ $booking->property->name }}</td> <!-- Property name -->
-                        <td>{{ $booking->user->name }}</td> <!-- User who booked -->
+                        <td>
+                            @if ($booking->property)
+                                {{ $booking->property->name }}
+                            @else
+                                <span class="text-danger">Property not found</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($booking->user)
+                                {{ $booking->user->name }}
+                            @else
+                                <span class="text-danger">user not found</span>
+                            @endif
+                        </td>
+
                         <td>{{ \Carbon\Carbon::parse($booking->start_date)->format('d-m-Y') }}</td> <!-- Start Date -->
                         <td>{{ \Carbon\Carbon::parse($booking->end_date)->format('d-m-Y') }}</td> <!-- End Date -->
                         <td>
@@ -26,7 +39,8 @@
                             <form action="{{ route('admin.bookings.destroy', $booking->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Are you sure?')">
                                     Delete
                                 </button>
                             </form>
