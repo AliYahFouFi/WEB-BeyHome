@@ -426,6 +426,8 @@
             <hr>
         </div>
         <div>
+
+
             <h2 class="text-center">Similar Properties</h2>
             <div class="container py-5">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -435,27 +437,23 @@
                             <div class="card h-100 shadow-lg border-0 position-relative">
 
                                 <div class="card-img-container position-relative">
-                                    <img src="{{ $property->image ?? 'https://picsum.photos/200/100' }}"
-                                        class="card-img-top rounded-top" alt="{{ $property->name }}" loading="lazy">
-                                    <div class="badge bg-success position-absolute top-0 start-0 m-2 px-3 py-1">
+                                    @if ($property->images)
+                                        @foreach (json_decode($property->images) as $image)
+                                            <img src="{{ asset('storage/' . $image) }}"
+                                                class="card-img-top rounded-top" alt="{{ $property->name }}"
+                                                loading="lazy">
+                                        @endforeach
+                                    @else
+                                        <img src="https://picsum.photos/200/100" class="card-img-top rounded-top"
+                                            alt="Default image" loading="lazy">
+                                    @endif
+                                    <div
+                                        class="badge {{ $property->booked ? 'bg-danger' : 'bg-success' }} position-absolute top-0 start-0 m-2 px-3 py-1">
                                         {{ $property->booked ? 'Booked' : 'Available' }}
                                     </div>
-                                    <!-- Heart Icon -->
-                                    <form action="{{ route('favorites.store', $property->id) }}" method="POST"
-                                        class="position-absolute top-0 end-0 m-2">
-                                        @csrf
-                                        {{-- ADD if the user added it change the icon to solid --}}
-                                        <button type="submit" class="btn btn-light btn-sm rounded-circle shadow">
-
-                                            <i class="fa-regular fa-heart"></i>
-                                        </button>
-                                    </form>
                                 </div>
-
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-primary">{{ $property->name }}</h5>
-
-
                                     <p class="card-text text-muted mb-3">
                                         {{ $property->description ?? 'No description available.' }}
                                     </p>
@@ -468,9 +466,7 @@
                                             View Property
                                         </a>
                                     </div>
-
                                 </div>
-
                                 <div class="card-footer bg-light">
                                     <small class="text-muted">Posted {{ $property->created_at->diffForHumans() }}
                                     </small>
@@ -479,11 +475,6 @@
                         </div>
                     @endforeach
                 </div>
-
-                <!-- Pagination -->
-                {{-- <div class="pagination mt-4">
-                    {{ $similarProperties->links('pagination::bootstrap-4') }}
-                </div> --}}
             </div>
 
         </div>
@@ -492,5 +483,6 @@
 
 
 <footer> @include('customLayouts.footer')</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </html>

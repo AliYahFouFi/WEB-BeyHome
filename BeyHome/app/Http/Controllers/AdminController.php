@@ -13,10 +13,11 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $usersCount = User::count();
+        $usersCount = User::where('role', 'user')->count();
+        $hostCount = User::where('role', 'host')->count();
         $propertiesCount = Property::count();
         $bookingsCount = Booking::count();
-        return view('admin.dashboard', compact('usersCount', 'propertiesCount', 'bookingsCount'));
+        return view('admin.dashboard', compact('usersCount', 'propertiesCount', 'bookingsCount', 'hostCount'));
     }
 
     //properties

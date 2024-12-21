@@ -9,19 +9,6 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -48,29 +35,17 @@ Route::middleware(['host'])->group(function () {
     Route::get('/properties/create', [PropertyController::class, 'create'])->name('properties.create');
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('/properties/host', [PropertyController::class, 'showHostProperties'])->name('properties.showHost');
+    Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('host.properties.destroy');
+    Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
 });
 
-
-//BREEZE
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
-require __DIR__ . '/auth.php';
-
-
-
-
-Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
 
 //for testing
-Route::get('/admin', function () {
-    return view('admin/dashboard');
-})->middleware('admin');
+Route::get('/test', function () {
+    return view('customLayouts\header');
+});
 
-
+//for admin panel
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/properties', [AdminController::class, 'showProperties'])->name('admin.showProperties');
@@ -80,3 +55,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/bookings', [AdminController::class, 'showBookings'])->name('admin.showBookings');
     Route::delete('/admin/bookings/{id}', [AdminController::class, 'destroyBooking'])->name('admin.bookings.destroy');
 });
+
+//BREEZE
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
+require __DIR__ . '/auth.php';

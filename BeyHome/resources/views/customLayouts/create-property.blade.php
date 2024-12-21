@@ -12,7 +12,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
+</head>
 
+<body>
+    <header>
+        @include('customLayouts.header')
+    </header>
     <style>
         .user_option {
             margin-left: 620px !important;
@@ -47,15 +52,15 @@
 
         input,
         textarea {
-            border: 1px solid #000;
-            background-color: #fff;
-            color: #000;
+            border: 1px solid #000 !important;
+            background-color: #fff !important;
+            color: #000 !important;
         }
 
         input:focus,
         textarea:focus {
-            border-color: #333;
-            box-shadow: none;
+            border-color: #333 !important;
+            box-shadow: none !important;
         }
 
         .btn {
@@ -94,13 +99,6 @@
             border: black 1px solid !important;
         }
     </style>
-</head>
-
-<body>
-    <header>
-        @include('customLayouts.header')
-    </header>
-
 
     <div class="container add-property">
         <h1>Add New Property</h1>
