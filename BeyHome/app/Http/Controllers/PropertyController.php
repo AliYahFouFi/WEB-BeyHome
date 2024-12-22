@@ -125,4 +125,41 @@ class PropertyController extends Controller
         $property->delete();
         return redirect()->back()->with('success', 'Property deleted successfully!');
     }
+
+    public function edit($id)
+    {
+        $property = Property::findOrFail($id);
+        return view('customLayouts.edit-property', compact('property'));
+    }
+
+
+
+    public function update(Request $request, $id)
+    {
+        $property = Property::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'location' => 'required|string',
+            'guests' => 'required|integer',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $property->update($validatedData);
+
+        // Handle new image uploads if any
+        if ($request->hasFile('images')) {
+            $images = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('properties', 'public');
+                $images[] = $path;
+            }
+            $property->images = json_encode($images);
+            $property->save();
+        }
+
+        return redirect()->route("properties.showHost")->with('success', 'Property updated successfully!');
+    }
 }
