@@ -39,12 +39,6 @@ Route::middleware(['host'])->group(function () {
     Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
 });
 
-
-//for testing
-Route::get('/test', function () {
-    return view('customLayouts\header');
-});
-
 //for admin panel
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -64,3 +58,13 @@ Route::middleware('auth')->group(function () {
 });
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth');
 require __DIR__ . '/auth.php';
+
+
+
+//for testing
+Route::get('/test', function () {
+    return view('customLayouts\edit-property');
+});
+
+Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('properties.update');
+Route::get('/properties/{id}/edit', [PropertyController::class, 'edit'])->name('properties.edit');

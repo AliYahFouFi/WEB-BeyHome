@@ -25,8 +25,9 @@
 
     .btn.btn-danger {
         width: 100%;
-        margin-top: 10px;
+        margin-top: 8px;
     }
+
 
     .text-center {
         text-align: center;
@@ -95,8 +96,12 @@
                                         class="btn btn-outline-primary w-100 hover-black">
                                         View Property
                                     </a>
+                                    <a href="{{ route('properties.edit', ['id' => $property->id]) }}"
+                                        class="btn btn-outline-primary w-100 hover-black mt-2">
+                                        Edit Property
+                                    </a>
                                     <form action="{{ route('host.properties.destroy', $property->id) }}" method="POST"
-                                        class="remove-from-wishlist-form">
+                                        class="remove-from-wishlist-form  ">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Remove</button>

@@ -60,6 +60,17 @@ select:focus {
 .user_option {
     margin-left: 620px !important;
 }
+/* @media (min-width: 768px) {
+    .user_option {
+        margin-left: 400px !important;
+    }
+}
+
+@media (min-width: 900px) {
+    .user_option {
+        margin-left: 620px !important;
+    }
+} */
 .text-light.dropdown-item:hover {
     color: black !important; /* Change text color on hover */
     background-color: white !important; /* Change background color on hover */
