@@ -67,7 +67,8 @@
                                 </div>
                                 <div class="col-md-5 ">
                                     <div class="img-box">
-                                        <img src="images/slider-img.png" alt="" />
+                                        <img src="images/slider-img-1.png" alt="" height="500px"
+                                            width="500px" />
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +98,8 @@
                                 </div>
                                 <div class="col-md-5 ">
                                     <div class="img-box">
-                                        <img src="images/slider-img.png" alt="" />
+                                        <img src="images/slider-img-3.png" alt="" height="500px"
+                                            width="500px" />
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +129,8 @@
                                 </div>
                                 <div class="col-md-5 ">
                                     <div class="img-box">
-                                        <img src="images/slider-img.png" alt="" />
+                                        <img src="images/slider-img-2.png" alt="" height="500px"
+                                            width="500px" />
                                     </div>
                                 </div>
                             </div>
