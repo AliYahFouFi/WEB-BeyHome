@@ -12,15 +12,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('properties', function (Blueprint $table) {
-            $table->json('images')->nullable();  // Use `json` type if using a database that supports it (like MySQL 5.7+)
+            $table->json('images')->nullable();
         });
     }
-    
+
     public function down()
     {
         Schema::table('properties', function (Blueprint $table) {
             $table->dropColumn('images');
         });
     }
-    
 };
