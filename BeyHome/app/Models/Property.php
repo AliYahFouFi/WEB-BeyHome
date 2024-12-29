@@ -5,10 +5,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\WrittenReview;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Property extends Model
 {
     //
+    use HasFactory;
+
     protected $fillable = [
         'name',
         'description',
