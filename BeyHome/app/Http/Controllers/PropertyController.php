@@ -75,41 +75,45 @@ class PropertyController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request data
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'category' => 'required|string',
-            'location' => 'required|string',
-            'area' => 'nullable|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-            'parking_spaces' => 'nullable|integer',
-            'furnished' => 'boolean',
-            'number_of_guests' => 'nullable|integer',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:10240',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
+        try {
+            // Validate the request data
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'price' => 'required|numeric',
+                'category' => 'required|string',
+                'location' => 'required|string',
+                'area' => 'nullable|numeric',
+                'bedrooms' => 'nullable|integer',
+                'bathrooms' => 'nullable|integer',
+                'parking_spaces' => 'nullable|integer',
+                'furnished' => 'boolean',
+                'number_of_guests' => 'nullable|integer',
+                'images' => 'nullable|array',
+                'images.*' => 'image|mimes:jpg,jpeg,png,gif|max:10240',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+            ]);
 
-        // Handle multiple image uploads
-        $imagePaths = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                // Store each image and push the path into the $imagePaths array
-                $imagePaths[] = $image->store('properties', 'public');
+            // Handle multiple image uploads
+            $imagePaths = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    // Store each image and push the path into the $imagePaths array
+                    $imagePaths[] = $image->store('properties', 'public');
+                }
             }
+
+            // Prepare the data to be stored
+            $validated['user_id'] = auth()->id();
+            $validated['images'] = json_encode($imagePaths);  // Store the image paths as a JSON array
+            $validated['rating'] = 0;
+            Property::create($validated);
+
+            return redirect()->route('home')->with('success', 'Property added successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to add property(Missing Data)  . Please try again.');
         }
-
-        // Prepare the data to be stored
-        $validated['user_id'] = auth()->id();
-        $validated['images'] = json_encode($imagePaths);  // Store the image paths as a JSON array
-        $validated['rating'] = 0;
-        Property::create($validated);
-
-        return redirect()->route('home')->with('success', 'Property added successfully!');
     }
 
     public function showHostProperties()

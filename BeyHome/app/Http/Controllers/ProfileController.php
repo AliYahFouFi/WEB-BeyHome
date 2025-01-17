@@ -57,23 +57,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-
-
-    public function storeCoordinates(Request $request)
-    {
-        $request->validate([
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
-        ]);
-
-        // Example: Save coordinates to the database
-        $property = Property::find($request->property_id); // Assuming property_id is sent with the request
-        $property->update([
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-        ]);
-
-        return redirect()->back()->with('success', 'Coordinates saved successfully!');
-    }
 }
