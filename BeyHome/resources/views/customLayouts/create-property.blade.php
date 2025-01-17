@@ -102,6 +102,11 @@
 
     <div class="container add-property">
         <h1>Add New Property</h1>
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">

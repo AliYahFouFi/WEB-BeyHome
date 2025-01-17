@@ -36,7 +36,6 @@ Route::middleware(['host'])->group(function () {
     Route::post('/properties', [PropertyController::class, 'store'])->name('properties.store');
     Route::get('/properties/host', [PropertyController::class, 'showHostProperties'])->name('properties.showHost');
     Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('host.properties.destroy');
-    Route::post('/property/store-coordinates', [PropertyController::class, 'storeCoordinates'])->name('property.storeCoordinates');
 });
 
 //for admin panel
