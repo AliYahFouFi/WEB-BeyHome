@@ -57,9 +57,9 @@ select:focus {
     color: #fff;
 }
 
-.user_option {
+/* .user_option {
     margin-left: 620px !important;
-}
+} */
 /* @media (min-width: 768px) {
     .user_option {
         margin-left: 400px !important;
@@ -74,4 +74,16 @@ select:focus {
 .text-light.dropdown-item:hover {
     color: black !important; /* Change text color on hover */
     background-color: white !important; /* Change background color on hover */
+}
+
+.custom-nav {
+    display: flex;
+    width: 100%;
+}
+
+.custom-nav .last-item {
+    margin-left: auto;
+}
+.nav-item {
+    padding-left: 20px;
 }

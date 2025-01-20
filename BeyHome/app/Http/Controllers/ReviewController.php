@@ -37,9 +37,6 @@ class ReviewController extends Controller
         property::where('id', $property->id)->update(['rating' => $temp]);
 
         return redirect()->back()->with('success', 'property rated successfully.');
-
-        // the json response is for ajax
-        // return response()->json(['success' => true, 'message' => 'Rating submitted successfully!']);
     }
 
 
